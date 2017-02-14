@@ -99,6 +99,7 @@
 				TargetAttributes = {
 					C705DBCA1E4B22EE000D2142 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 2QJCV27NGS;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -264,7 +265,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 2QJCV27NGS;
 				INFOPLIST_FILE = Parallex/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.PrateekMahawar.Parallex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -276,7 +280,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 2QJCV27NGS;
 				INFOPLIST_FILE = Parallex/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.PrateekMahawar.Parallex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -303,6 +310,7 @@
 				C705DBDF1E4B22EF000D2142 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

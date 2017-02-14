@@ -24,6 +24,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         UIImage(named: "image - 09")!,
     ]
     
+    var scaledImages : [UIImage] = []
+    
     var parallaxOffsetSpeed:CGFloat = 50
     var cellHeight: CGFloat = 200
     
@@ -31,6 +33,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
+        
+        for i in 0 ..< images.count  {
+            let image = images[i]
+            
+            let size = image.size.applying(CGAffineTransform(scaleX: 0.5, y: 0.5))
+            let hasAlpha = false
+            let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
+            
+            UIGraphicsBeginImageContextWithOptions(size, !hasAlpha, scale)
+            image.draw(in: CGRect(origin: CGPoint.zero, size: size))
+            
+            let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            scaledImages.append(scaledImage!)
+
+        }
+        
     }
 
     var parallaxImageHeight: CGFloat {
@@ -44,7 +64,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath) as! ImageCellTableVC
-        cell.configureCell(text: titleArr[indexPath.row], Imag: images[indexPath.row])
+        cell.configureCell(text: titleArr[indexPath.row], Imag: scaledImages[indexPath.row])
         cell.imagePicHeight.constant = self.parallaxImageHeight
         cell.parallexTopConstraint.constant = parallaxOffset(newOffsetY: tableView.contentOffset.y, cell: cell)
         
@@ -57,10 +77,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //        let offsetY = tableView.contentOffset.y
-        for cell in tableView.visibleCells as! [ImageCellTableVC] {
-            cell.parallexTopConstraint.constant = parallaxOffset(newOffsetY: tableView.contentOffset.y, cell: cell)
+        DispatchQueue.main.async {
+            
+            for cell in self.tableView.visibleCells as! [ImageCellTableVC] {
+            cell.parallexTopConstraint.constant = self.parallaxOffset(newOffsetY: self.tableView.contentOffset.y, cell: cell)
+            }
         }
     }
-
 }
 
